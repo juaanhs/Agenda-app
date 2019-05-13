@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import br.com.juaanhs.agenda.ListaAlunosActivity;
 import br.com.juaanhs.agenda.R;
 import br.com.juaanhs.agenda.modelo.Aluno;
 
