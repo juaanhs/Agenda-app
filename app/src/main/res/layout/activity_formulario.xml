@@ -35,24 +35,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nome:"
+            android:inputType="textCapWords"
             android:id="@+id/formulario_nome"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Telefone:"
+            android:inputType="phone"
             android:id="@+id/formulario_telefone"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Endereço:"
+            android:inputType="textPostalAddress"
             android:id="@+id/formulario_endereco"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Site:"
+            android:inputType="textWebEditText"
             android:id="@+id/formulario_site"/>
 
         <RatingBar

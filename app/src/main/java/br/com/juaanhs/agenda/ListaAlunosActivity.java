@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -21,19 +19,20 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.juaanhs.agenda.adapter.AlunosAdapter;
-import br.com.juaanhs.agenda.converter.AlunoConverter;
 import br.com.juaanhs.agenda.dao.AlunoDAO;
 import br.com.juaanhs.agenda.modelo.Aluno;
 
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
+    private static final String TITULO_APPBAR = "Lista de alunos";
     private ListView listaAlunos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
+        setTitle(TITULO_APPBAR);
 
         listaAlunos = findViewById(R.id.lista_alunos);
 
@@ -144,18 +143,18 @@ public class ListaAlunosActivity extends AppCompatActivity {
         intentSite.setData(Uri.parse(site));
         itemSite.setIntent(intentSite);
 
-        MenuItem deletar  = menu.add("Deletar");
+        final MenuItem deletar  = menu.add("Excluir");
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
                 AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
                 dao.deleta(aluno);
                 dao.close();
-                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() +" deletado!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() +" excluido!",Toast.LENGTH_SHORT).show();
                 carregaLista();
                 return false;
             }
         });
     }
 }
+

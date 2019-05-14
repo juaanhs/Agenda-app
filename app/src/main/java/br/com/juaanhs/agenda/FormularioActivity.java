@@ -2,8 +2,6 @@ package br.com.juaanhs.agenda;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -24,8 +21,9 @@ import br.com.juaanhs.agenda.dao.AlunoDAO;
 import br.com.juaanhs.agenda.modelo.Aluno;
 
 public class FormularioActivity extends AppCompatActivity {
-
-    public static final int CODIGO_CAMERA = 567;
+    private static final String TITULO_APPBAR_NOVO_ALUNO = "Novo aluno";
+    private static final int CODIGO_CAMERA = 567;
+    private static final String TITULO_APPBAR_EDITA_ALUNO = "Edita aluno";
     private FormularioHelper helper;
     private String caminhoFoto;
 
@@ -33,6 +31,7 @@ public class FormularioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+        setTitle(TITULO_APPBAR_NOVO_ALUNO);
 
         helper = new FormularioHelper(this);
 
@@ -40,6 +39,7 @@ public class FormularioActivity extends AppCompatActivity {
         Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
 
         if(aluno != null) {
+            setTitle(TITULO_APPBAR_EDITA_ALUNO);
             helper.preencheFormulario(aluno);
         }
 
@@ -88,9 +88,7 @@ public class FormularioActivity extends AppCompatActivity {
                     dao.insere(aluno);
                 }
                 dao.close();
-
                 Toast.makeText(FormularioActivity.this, "Aluno "+ aluno.getNome() +" salvo!", Toast.LENGTH_SHORT).show();
-
                 finish();
                 break;
         }
