@@ -23,7 +23,7 @@ import br.com.juaanhs.agenda.modelo.Aluno;
 public class FormularioActivity extends AppCompatActivity {
     private static final String TITULO_APPBAR_NOVO_ALUNO = "Novo aluno";
     private static final int CODIGO_CAMERA = 567;
-    private static final String TITULO_APPBAR_EDITA_ALUNO = "Edita aluno";
+    private static final String TITULO_APPBAR_EDITA_ALUNO = "Editar aluno";
     private FormularioHelper helper;
     private String caminhoFoto;
 
