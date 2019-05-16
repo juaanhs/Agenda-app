@@ -1,10 +1,12 @@
 package br.com.juaanhs.agenda;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -147,11 +149,19 @@ public class ListaAlunosActivity extends AppCompatActivity {
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
-                dao.deleta(aluno);
-                dao.close();
-                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() +" excluido!",Toast.LENGTH_SHORT).show();
-                carregaLista();
+                new AlertDialog.Builder(ListaAlunosActivity.this).setTitle("Excluindo aluno")
+                        .setMessage("Tem certeza que quer excluir esse aluno?")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AlunoDAO dao = new AlunoDAO(ListaAlunosActivity.this);
+                                dao.deleta(aluno);
+                                dao.close();
+                                carregaLista();
+                                Toast.makeText(ListaAlunosActivity.this, "Aluno " + aluno.getNome() +" excluido!",Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("Não", null).show();
                 return false;
             }
         });
